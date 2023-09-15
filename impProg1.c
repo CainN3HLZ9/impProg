@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 void clearBuffer() {
   int buffer;
@@ -9,10 +10,10 @@ void clearBuffer() {
 }
 float scanNums(){
   float num;
-  bool validInput = false;
-  while (validInput == false) {
+  bool checkNum = false;
+  while (checkNum == false) {
     if (scanf("%f", &num) == 1){
-      validInput = true;
+      checkNum = true;
       clearBuffer();
       return num;
     }
@@ -90,6 +91,33 @@ void feladat6(){
   }
   printf("The typed days equals %i year(s), %i week(s) and %i days\n",years, weeks, days);
 }
+void feladat7() {
+  float celsius, farenheit;
+  char convertFrom;
+  printf("Please enter what do you want to convert from:(F: Farenheit C: Celsius)\n");
+  while (scanf(" %c", &convertFrom) == 1){
+    if (convertFrom == 'C' || convertFrom == 'F' || convertFrom == 'c' || convertFrom == 'f') {
+      if (convertFrom == 'c' || convertFrom == 'C') {
+        printf("Please type the measure you want to convert:\n");
+        celsius = scanNums();
+        farenheit = (celsius-32)*1.8;
+        printf("%f°C is equals %f˚F\n", celsius, farenheit);
+        break;
+      }
+      else {
+        printf("Please type the measure you want to convert:\n");
+        farenheit = scanNums();
+        celsius = (farenheit*1.8)+32;
+        printf("%.1f°C is equals %.2f˚F\n", celsius, farenheit);
+        break;
+      }
+    }
+    else {
+      clearBuffer();
+      printf("Please type F or C as the measure\n");
+    }
+  }
+}
 int main() {
 //  feladat1();
 //  feladat2();
@@ -97,5 +125,7 @@ int main() {
 //  feladat4();
 //  feladat5();
 //  feladat6();
-  return 0;
+  feladat7();
+
+return 0;
 }
